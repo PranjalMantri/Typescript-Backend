@@ -1,7 +1,13 @@
 import express from "express";
+import config from "config";
+import connectDb from "./utils/connect";
 
 const app = express();
 
-app.listen(8000, () => {
-  console.log("App is running");
+const port = config.get<number>("port");
+
+app.listen(port, async () => {
+  console.log(`Server running on port: ${port}`);
+
+  await connectDb();
 });
