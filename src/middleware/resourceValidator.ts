@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction, query } from "express";
 import { AnyZodObject } from "zod";
 
+// This middleware will take a schema and the data, it will validate the data and pass it to its destined route
 const resourceValidator =
   (schema: AnyZodObject) =>
   (req: Request, res: Response, next: NextFunction) => {
