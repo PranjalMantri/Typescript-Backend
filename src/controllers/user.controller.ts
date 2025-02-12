@@ -1,6 +1,7 @@
 import { Request, RequestHandler, Response } from "express";
 import logger from "../utils/logger";
 import { createUser } from "../service/user.service";
+import { omit } from "lodash";
 
 export async function createUserHandler(
   req: Request,
@@ -8,7 +9,7 @@ export async function createUserHandler(
 ): Promise<void> {
   try {
     const user = await createUser(req.body);
-    res.status(200).send(user);
+    res.status(200).send(omit(user.toJSON(), "password"));
   } catch (error: any) {
     logger.error(error);
     res.status(409).send(error.message);

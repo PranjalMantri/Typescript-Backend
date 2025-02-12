@@ -10,17 +10,19 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "ts-node-dev": "^2.0.0"
-  },
-  "dependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/config": "^3.3.5",
     "@types/express": "^5.0.0",
+    "@types/lodash": "^4.17.15",
     "@types/pino": "^7.0.5",
+    "ts-node-dev": "^2.0.0"
+  },
+  "dependencies": {
     "bcrypt": "^5.1.1",
     "config": "^3.3.12",
     "dayjs": "^1.11.13",
     "express": "^4.21.2",
+    "lodash": "^4.17.21",
     "mongoose": "^8.10.0",
     "pino": "^9.6.0",
     "pino-pretty": "^13.0.0",
