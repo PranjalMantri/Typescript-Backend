@@ -2,7 +2,7 @@ import express from "express";
 import config from "config";
 import connectDb from "./utils/connect";
 import logger from "./utils/logger";
-import router from "./routes";
+import routes from "./routes";
 
 const app = express();
 
@@ -13,5 +13,5 @@ app.listen(port, async () => {
 
   await connectDb();
 
-  app.use(router);
+  routes(app);
 });
