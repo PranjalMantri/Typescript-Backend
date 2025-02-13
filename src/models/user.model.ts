@@ -1,4 +1,4 @@
-import { Schema, model, Document, Model } from "mongoose";
+import { Schema, model, Document, Model, Types } from "mongoose";
 import bcrypt from "bcrypt";
 import config from "config";
 
@@ -9,6 +9,7 @@ interface UserInput {
 }
 
 interface UserDocument extends UserInput, Document {
+  _id: string;
   createdAt: Date;
   updatedAt: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
@@ -18,7 +19,7 @@ const userSchema = new Schema(
   {
     email: { type: String, required: true, unique: true },
     name: { type: String, required: true },
-    password: { type: String, required: true, select: false },
+    password: { type: String, required: true },
   },
   { timestamps: true }
 );
@@ -46,13 +47,6 @@ userSchema.methods.comparePassword = async function (
   return bcrypt.compare(candidatePassword, user.password).catch((e) => false);
 };
 
-userSchema.statics.findUserByEmail = async function (
-  email: string
-): Promise<UserDocument> {
-  // Here, this refers to the UserModel itself not the UserDocument, hence it has access to findOne and other such methods
-  return await this.findOne({ email });
-};
-
-const User = model("User", userSchema);
+const User = model<UserDocument>("User", userSchema);
 
 export { User, UserInput, UserDocument };
